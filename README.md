@@ -19,6 +19,3 @@ Solution: Increassed the warm-up delay to -t 100 and added the immediate flag to
 The pi 5 introduces the RPI/O controller, which handles GPIO pins differently than previous models.
 Solution: Migrated from "Event-Driven" code to a "Polling Loop" using a while True statement. This bypasses the buggy backlground threading in current gpiozero versions on the pi 5.
 
-3. Syntax and pathing
-   Syntax: Grove sesors require pull_up=False to allow the sensor to manage its own electrical signal.
-   Solution: Resolved "failed to open file" errors by using os.path.expanduser("~") to dynamically locate the user's  Home directrory rather than hard-coding /home/pi/.
