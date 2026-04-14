@@ -1,0 +1,30 @@
+from gpiozero import MotionSensor
+from time import sleep
+import os
+from datetime import datetime
+
+pir= MotionSensor(4, pull_up=False)
+
+print ("---SYSTEM STARTING ---")
+print("Warming up... stay perfectly still for 15 seconds.")
+sleep(15)
+print ("SYSTEM ARMED: Watching for motion...")
+
+while True:
+    if  pir.motion_detected:
+        print("MOTION DETECTED")
+    
+    
+        timestamp = datetime.now().strftime("%H-%M-%S")
+        photo_name = f"intruder_{timestamp}.jpg"
+        
+        print(f"Motion detected! Capturing: {photo_name}")
+        
+        os.system(f"rpicam-still -t 100 -o {photo_name} --nopreview --immediate")
+        
+        print("Done. Waiting for sensor to reset")
+        sleep(10)
+        print("Watching again...")
+        
+
+    sleep(0.1)
